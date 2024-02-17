@@ -1,3 +1,7 @@
+vim.api.nvim_set_keymap('i', '<D-[>', '<Esc>', {noremap = true})
+vim.api.nvim_set_keymap('n', '<D-[>', '<Esc>', {noremap = false})
+
+vim.api.nvim_set_keymap('n', '<D-f>', ':Explore<CR>', {noremap = true})
 --[[
 
 =====================================================================
