@@ -207,7 +207,7 @@ require('lazy').setup({
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
-    priority = 1000,
+    priority = 100,
     lazy = false,
     config = function()
       require('onedark').setup {
@@ -217,7 +217,7 @@ require('lazy').setup({
       require('onedark').load()
     end,
   },
-
+  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -292,7 +292,7 @@ require('lazy').setup({
 -- [[ Setting options ]]
 -- See `:help vim.o`
 -- NOTE: You can change these options as you wish!
-
+vim.cmd.colorscheme "catppuccin-latte"
 -- Set highlight on search
 vim.o.hlsearch = false
 
