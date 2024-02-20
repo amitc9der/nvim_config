@@ -1,5 +1,3 @@
-vim.api.nvim_set_keymap('i', '<D-[>', '<Esc>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<D-[>', '<Esc>', {noremap = false})
 
 vim.api.nvim_set_keymap('n', '<D-f>', ':Explore<CR>', {noremap = true})
 --[[
@@ -591,7 +589,7 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  -- gopls = {},
+  gopls = {},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
