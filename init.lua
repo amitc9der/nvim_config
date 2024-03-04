@@ -285,6 +285,23 @@ require('lazy').setup({
   --
   --    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
   -- { import = 'custom.plugins' },
+  {
+  "christoomey/vim-tmux-navigator",
+  cmd = {
+    "TmuxNavigateLeft",
+    "TmuxNavigateDown",
+    "TmuxNavigateUp",
+    "TmuxNavigateRight",
+    "TmuxNavigatePrevious",
+  },
+  keys = {
+    { "<C-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+    { "<C-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+    { "<C-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+    { "<C-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+    { "<C-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  },
+}
 }, {})
 
 -- [[ Setting options ]]
@@ -441,7 +458,7 @@ vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = 
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'html','cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = false,
@@ -590,10 +607,11 @@ require('mason-lspconfig').setup()
 local servers = {
   -- clangd = {},
   gopls = {},
+  templ = { filetypes = {'templ','go'}},
   -- pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -641,6 +659,7 @@ cmp.setup {
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
+      
     end,
   },
   completion = {
@@ -677,6 +696,8 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name='htmlbeautifier'},
+    { name = 'html-lsp' },
     { name = 'luasnip' },
     { name = 'path' },
   },
