@@ -1,4 +1,4 @@
-vim.foldmethod=indent
+vim.api.nvim_set_keymap('n', '<c-cr>','i<cr><Esc>',{})
 vim.api.nvim_set_keymap('n', '<D-f>', ':Explore<CR>', {noremap = true})
 --[[
 
@@ -309,6 +309,15 @@ require('lazy').setup({
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  }
 }, {})
 
 -- [[ Setting options ]]
@@ -316,7 +325,7 @@ require('lazy').setup({
 -- NOTE: You can change these options as you wish!
 -- vim.cmd.colorscheme "catppuccin-latte"
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
@@ -694,6 +703,7 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
+    { name = 'angular-language-server'},
     { name='htmlbeautifier'},
     { name = 'html-lsp' },
     { name = 'luasnip' },
@@ -745,6 +755,8 @@ require('ufo').setup({
     return { 'lsp','indent' }
   end
 })
+
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
