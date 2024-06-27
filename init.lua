@@ -96,7 +96,7 @@ require('lazy').setup({
       'folke/neodev.nvim',
     },
   },
-
+  { 'joeveiga/ng.nvim'},
   {
     -- Autocompletion
     'hrsh7th/nvim-cmp',
@@ -210,7 +210,8 @@ require('lazy').setup({
     config = function()
       require('onedark').setup {
         -- Set a style preset. 'dark' is default.
-        style = 'dark', -- dark, darker, cool, deep, warm, warmer, light
+        style = 'cool', -- dark, darker, cool, deep, warm, warmer, light
+        transparent = true,  
       }
       require('onedark').load()
     end,
@@ -398,6 +399,10 @@ require('telescope').setup {
         ['<C-d>'] = false,
       },
     },
+    file_ignore_patterns = {
+      "node_modules",
+      "dist",
+    }
   },
 }
 
@@ -601,8 +606,9 @@ require('which-key').register({
 -- mason-lspconfig requires that these setup functions are called in this order
 -- before setting up the servers.
 require('mason').setup()
-require('mason-lspconfig').setup()
-
+require('mason-lspconfig').setup{
+  ensure_installed = {"tsserver","angularls"}
+}
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --
@@ -613,12 +619,14 @@ require('mason-lspconfig').setup()
 --  define the property 'filetypes' to the map in question.
 local servers = {
   -- clangd = {},
-  gopls = {},
-  templ = { filetypes = {'templ','go'}},
+  -- gopls = {},
+  -- templ = { filetypes = {'templ','go'}},
   -- pyright = {},
+
   -- rust_analyzer = {},
-  -- tsserver = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  angularls = {},
+  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+
 
   lua_ls = {
     Lua = {
@@ -748,6 +756,13 @@ vim.keymap.set('n', 'zK', function()
     vim.lsp.buf.hover()
   end
 end,{ desc = "Peek Fold"})
+
+-- Setuping up ng.nvim 
+local opts = { noremap = true, silent = true }
+local ng = require("ng")
+vim.keymap.set("n", "<leader>at", ng.goto_template_for_component, opts)
+vim.keymap.set("n", "<leader>ac", ng.goto_component_with_template_file, opts)
+vim.keymap.set("n", "<leader>aT", ng.get_template_tcb, opts)
 
 -- Option 1: coc.nvim as LSP client
 require('ufo').setup({
